@@ -74,7 +74,7 @@ class LocalRelationalLayer(torch.nn.Module):
         ak = self.ac((km, qm))
         ck = combine_prior(ak, gpk)[:, None, :, :, :]
         x_unfold = self.unfold(x)
-        x_unfold = x_unfold.view(x.shape[0], self.m, x.shape[1] // m,
+        x_unfold = x_unfold.view(x.shape[0], self.m, x.shape[1] // self.m,
                                  -1, x_unfold.shape[-2] // x.shape[1])
         pre_output = (ck * x_unfold).view(x.shape[0], x.shape[1],
                                           -1, x_unfold.shape[-2] // x.shape[1])
